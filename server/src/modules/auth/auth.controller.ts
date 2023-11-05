@@ -6,6 +6,7 @@ import {
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterDto, RegisterResponse } from './dto/create-user.dto';
+import { LoginDto } from './dto/login.dto';
 
 
 @Controller('auth')
@@ -19,6 +20,11 @@ export class AuthController {
     type: RegisterResponse,
   })
   async register(@Body() body: RegisterDto) {
-    console.log(body)
+    return this.authService.signUpByEmail(body);
+  }
+
+  @Post('login')
+  async login(@Body() body: LoginDto) {
+    return this.authService.login(body);
   }
 }

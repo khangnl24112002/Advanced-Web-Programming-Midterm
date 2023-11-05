@@ -9,7 +9,7 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     JwtModule.register({
       signOptions: {
-        expiresIn: '5h',
+        expiresIn: '30d',
       },
     }),
   ],
