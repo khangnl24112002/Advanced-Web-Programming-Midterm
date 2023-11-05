@@ -24,7 +24,7 @@ async function bootstrap() {
   SwaggerModule.setup('api/swagger', app, document);
   await app.listen(port);
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${process.env.GLOBAL_PREFIX}`,
+    `🚀 Application is running on: http://localhost:${port}/api/swagger`,
   );
 }
 
