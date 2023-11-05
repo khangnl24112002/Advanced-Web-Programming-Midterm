@@ -1,4 +1,9 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Logger,
+  ValidationPipe,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { CORS } from './common';
@@ -9,10 +14,25 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors(CORS);
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3333;
   app.useGlobalPipes(
     new ValidationPipe({
+      exceptionFactory: (errors) => {
+        const result = errors.map((error) => ({
+          property: error.property,
+          message: error.constraints[Object.keys(error.constraints)[0]],
+        }));
+        throw new HttpException(
+          {
+            message: result[0].message,
+            data: null,
+            status: false,
+          },
+          HttpStatus.BAD_REQUEST,
+        );
+      },
       transform: true,
+      stopAtFirstError: true,
     }),
   );
   app.use(cookieParser());

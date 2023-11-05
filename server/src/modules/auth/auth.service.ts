@@ -50,6 +50,7 @@ export class AuthService {
       data: {
         token: accessToken,
         user: {
+          id: user.id,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
@@ -93,6 +94,7 @@ export class AuthService {
       data: {
         token: access_token,
         user: {
+          id: ex_user.id,
           email: ex_user?.email,
           firstName: ex_user.firstName,
           lastName: ex_user.lastName,
