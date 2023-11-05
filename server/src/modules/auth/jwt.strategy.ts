@@ -9,6 +9,7 @@ import {
 import { PrismaService } from '../../prisma.service';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  // eslint-disable-next-line prettier/prettier
   constructor(private readonly prismaService: PrismaService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

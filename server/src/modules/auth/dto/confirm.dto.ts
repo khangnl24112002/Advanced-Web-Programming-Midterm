@@ -27,7 +27,7 @@ export class ConfirmReponse {
     nullable: false,
   })
   data: {
-    link: string;
+    link: string,
   };
   @ApiProperty({ example: 'Gửi mail thành công.', nullable: true })
   message: { [key: string]: any };
