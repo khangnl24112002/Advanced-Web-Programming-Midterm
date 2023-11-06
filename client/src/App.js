@@ -10,13 +10,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<AuthLayout />}>
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route path="/dashboard" element={<ProtectedLayout />}>
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="profile" index element={<Profile />} />
           {/* Handle other routes */}
         </Route>
       </Routes>

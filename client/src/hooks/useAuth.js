@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       login,
       logout,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user]
   );
 

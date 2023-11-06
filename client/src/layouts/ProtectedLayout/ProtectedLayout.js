@@ -1,7 +1,15 @@
-import React from "react";
+import { Navigate, useOutlet } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const ProtectedLayout = () => {
-  return <div>ProtectedLayout</div>;
+  const { user } = useAuth();
+  const outlet = useOutlet();
+
+  if (!user) {
+    return <Navigate to="/auth/sign-in" />;
+  }
+
+  return <div>{outlet}</div>;
 };
 
 export default ProtectedLayout;
