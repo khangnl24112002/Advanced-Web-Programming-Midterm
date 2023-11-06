@@ -1,7 +1,9 @@
+import Button from "react-bootstrap/Button";
+
 function App() {
   return (
     <div className="App">
-      <h1>Midterm Project</h1>
+      <Button>DD</Button>
     </div>
   );
 }
