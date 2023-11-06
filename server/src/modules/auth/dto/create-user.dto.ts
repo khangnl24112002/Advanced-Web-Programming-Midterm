@@ -19,8 +19,8 @@ export class RegisterResponse {
     nullable: true,
   })
   data: {
-    user: IUser;
-    token: string;
+    user: IUser,
+    token: string,
   };
   @ApiProperty({ example: 'Đăng ký thành công', nullable: true })
   message: { [key: string]: any };
@@ -40,11 +40,11 @@ export class RegisterDto {
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
-  firstName?: string;
+  firstName: string;
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
-  lastName?: string;
+  lastName: string;
 }
 export class AccountDto {
   @ApiProperty({ example: 'test@gmail.com' })
@@ -55,13 +55,13 @@ export class AccountDto {
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
-  firstName?: string;
+  firstName: string;
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
-  lastName?: string;
+  lastName: string;
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
-  picture?: string;
+  picture: string;
 }
