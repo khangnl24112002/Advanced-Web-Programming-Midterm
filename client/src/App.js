@@ -5,7 +5,7 @@ import AuthLayout from "./layouts/Auth/AuthLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout/ProtectedLayout";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
-
+import NotFound from "./pages/NotFound/NotFound";
 function App() {
   return (
     <div className="App">
@@ -19,6 +19,7 @@ function App() {
           <Route path="profile" index element={<Profile />} />
           {/* Handle other routes */}
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
