@@ -4,6 +4,7 @@ import { comparePassword, hashPassword } from 'src/utils/bcrypt';
 import { RegisterDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
+import { ROLES } from 'src/utils';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,8 @@ export class AuthService {
     });
   }
   async signUpByEmail(createUserDTO: RegisterDto) {
-    const { firstName, lastName, email, password } = createUserDTO;
+    const { firstName, lastName, email, password, role } = createUserDTO;
+    const roleId = ROLES[role.toUpperCase()]
     const encryptedPassword = await hashPassword(password);
     let user = await this.prismaService.users.findFirst({
       where: {
@@ -38,6 +40,7 @@ export class AuthService {
           lastName,
           email,
           encryptedPassword,
+          roleId
         },
       });
     }

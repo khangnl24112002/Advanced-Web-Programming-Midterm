@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IUser } from '../interface/creath-auth.interface';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class RegisterResponse {
   @ApiProperty({ example: 'true', type: Boolean })
@@ -39,12 +39,19 @@ export class RegisterDto {
   password: string;
 
   @ApiProperty({ example: 'ptnminh' })
+  @IsOptional()
   @IsString()
   firstName: string;
 
   @ApiProperty({ example: 'ptnminh' })
   @IsString()
+  @IsOptional()
   lastName: string;
+
+  @ApiProperty({ example: 'admin' })
+  @IsString()
+  @IsOptional()
+  role: string;
 }
 export class AccountDto {
   @ApiProperty({ example: 'test@gmail.com' })
