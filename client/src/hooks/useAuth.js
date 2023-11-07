@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
+  // const [token, setToken] = useLocalStorage("token", null);
   const navigate = useNavigate();
   const login = async (data) => {
     setUser(data);
