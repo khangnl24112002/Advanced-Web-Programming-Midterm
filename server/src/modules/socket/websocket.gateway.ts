@@ -2,6 +2,7 @@ import {
   ConnectedSocket,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
@@ -9,6 +10,7 @@ import { Socket, Server } from 'socket.io';
 import { JwtService } from '@nestjs/jwt';
 import { UseGuards } from '@nestjs/common';
 import { WsAuthGuard } from '../../guards/ws-auth.guard';
+import { PrismaService } from 'src/prisma.service';
 @UseGuards(WsAuthGuard)
 @WebSocketGateway({
   cors: {
@@ -24,6 +26,7 @@ export class ChatWebsocketGateway
   constructor(
     // eslint-disable-next-line prettier/prettier
     private readonly jwtService: JwtService,
+    private readonly prismaService: PrismaService
   ) {}
   @WebSocketServer()
   server: Server;
@@ -51,5 +54,33 @@ export class ChatWebsocketGateway
     }
   }
 
+  @SubscribeMessage('show-online-user')
+  async handleShowOnlineUser() {
+    try {
+      const usersId = [...this.server.sockets.adapter.rooms.keys()];
+      const users = await Promise.all(
+        usersId.map(async (id) => {
+          return await this.prismaService.users.findUnique({
+            where: {
+              id
+            }
+          })
+        }),
+      );
+      const filterUsers = [...users].filter((user) => {
+        if (user) {
+          return {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            roleId: user.roleId,
+          };
+        }
+      }) as unknown as { id: string; name: string; avatar: string }[];
+      this.server.emit('receive-online-user', filterUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
 }
