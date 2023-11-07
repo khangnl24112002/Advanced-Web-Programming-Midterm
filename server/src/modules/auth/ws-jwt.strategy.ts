@@ -12,7 +12,7 @@ export class WsJwtStrategy extends PassportStrategy(Strategy, 'wsjwt') {
       jwtFromRequest: (req) => {
         return req.handshake?.auth?.token;
       },
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: process.env.SECRET_KEY,
     });
   }
   async validate(payload): Promise<any> {

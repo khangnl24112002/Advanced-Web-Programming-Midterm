@@ -14,7 +14,7 @@ import { WsAuthGuard } from '../../guards/ws-auth.guard';
   cors: {
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    origin: ['http://localhost:8080'],
+    origin: ['http://localhost:3000'],
   },
   //transports: ['polling', 'websocket'],
 })
@@ -35,7 +35,7 @@ export class ChatWebsocketGateway
         client.disconnect();
       }
       const { _id: userId } = this.jwtService.verify(accessToken, {
-        secret: process.env.JWT_SECRET,
+        secret: process.env.SECRET_KEY,
       });
       client.join(userId);
     } catch (error) {
