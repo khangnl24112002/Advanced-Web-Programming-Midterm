@@ -1,4 +1,4 @@
-export const ROLES = {
-  ADMIN: 1,
-  USER: 2,
-};
+export enum ROLES {
+  ADMIN = 1,
+  USER = 2,
+}

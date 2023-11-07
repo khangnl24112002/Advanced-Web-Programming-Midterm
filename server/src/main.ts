@@ -9,6 +9,7 @@ import { AppModule } from './app/app.module';
 import { CORS } from './common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
+import { SecuritySchemeObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -39,6 +40,14 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('API docs')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        schema: 'Bearer',
+        bearerFormat: 'Token',
+      } as SecuritySchemeObject,
+      'Bearer'
+    )
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api/swagger', app, document);

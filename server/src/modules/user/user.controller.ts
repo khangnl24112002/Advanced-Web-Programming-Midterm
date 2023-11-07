@@ -1,11 +1,18 @@
-import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GetUsersResponse } from './dto/create-user.dto';
+import { JwtAuthGuard } from 'src/guards/jwt.auth.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { ROLES } from 'src/utils';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @Controller('user')
 @ApiTags('user')
+@ApiBearerAuth('Bearer')
+@Roles(ROLES.ADMIN)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class UserController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly userService: UserService) {}
