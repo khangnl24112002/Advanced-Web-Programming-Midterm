@@ -2,13 +2,11 @@ import { axiosInstance } from "../utils/axios";
 
 export const authServices = {
   login: async (userAccount) => {
-    await axiosInstance
-      .post("/auth/login", userAccount)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    try {
+      const response = await axiosInstance.post("/auth/login", userAccount);
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
   },
 };
