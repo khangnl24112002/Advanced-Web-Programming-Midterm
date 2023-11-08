@@ -5,27 +5,47 @@ import FormInput from "../../components/FormInput/FormInput";
 import Button from "../../components/Button/Button";
 import { Form } from "react-bootstrap"
 const SignInForm = () => {
+
     const [userAccount, setUserAccount] = useState({
+        email: "",
+        password: "",
+    });
+    const [errors, setErrors] = useState({
         email: "",
         password: "",
     });
     const handleSubmit = (event) => {
         event.preventDefault();
+        validateData(userAccount);
         console.log(userAccount);
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         setUserAccount((prevState) => ({
             ...prevState,
             [name]: value,
         }))
     }
+
+    const validateData = (userAccount) => {
+        if (userAccount.email === '') {
+            setErrors((prevState) => ({
+                ...prevState,
+                email: "Email must be required"
+            }))
+        }
+        if (userAccount.password === '') {
+            setErrors((prevState) => ({
+                ...prevState,
+                password: "Password must be required"
+            }))
+        }
+    }
+
     return (
         <Form onSubmit={handleSubmit}>
             <h3 className="text-center">Sign In</h3>
-            <FormInput type="email" name="email" title="Email" placeholder="Enter Email" value={userAccount.email} onChange={handleChange} />
+            <FormInput error={errors.email} type="email" name="email" title="Email" placeholder="Enter Email" value={userAccount.email} onChange={handleChange} />
             <FormInput
                 type="password"
                 name="password"
@@ -33,6 +53,7 @@ const SignInForm = () => {
                 placeholder="Enter Password"
                 value={userAccount.password}
                 onChange={handleChange}
+                error={errors.password}
             />
             <div>
                 <input

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormInput = ({ type, name, title, placeholder, value, onChange }) => {
+const FormInput = ({ type, name, title, placeholder, value, onChange, error }) => {
     return (
         <div className="mb-2">
             <label htmlFor="password">{title}</label>
@@ -12,6 +12,7 @@ const FormInput = ({ type, name, title, placeholder, value, onChange }) => {
                 onChange={onChange}
                 name={name}
             />
+            {error !== '' ? <p className='text-danger'>{error}</p> : null}
         </div>
     )
 }
