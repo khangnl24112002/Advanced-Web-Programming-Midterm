@@ -9,4 +9,12 @@ export const authServices = {
       return error.response.data;
     }
   },
+  signup: async (userAccount) => {
+    try {
+      const response = await axiosInstance.post("/auth/register", userAccount);
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  },
 };

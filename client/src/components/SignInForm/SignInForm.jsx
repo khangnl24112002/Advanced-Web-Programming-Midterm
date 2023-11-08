@@ -10,14 +10,12 @@ import { useAuth } from "../../hooks/useAuth"
 
 const SignInForm = () => {
 
-    const [userAccount, setUserAccount] = useState({
+    const initalState = {
         email: "",
         password: "",
-    });
-    const [errors, setErrors] = useState({
-        email: "",
-        password: "",
-    });
+    }
+    const [userAccount, setUserAccount] = useState(initalState);
+    const [errors, setErrors] = useState(initalState);
     const [submitResult, setSubmitResult] = useState('');
     const { login } = useAuth();
 
@@ -44,21 +42,24 @@ const SignInForm = () => {
     }
 
     const validateData = (userAccount) => {
+        setErrors(initalState)
+        let result = 1;
+        console.log(userAccount)
         if (userAccount.email === '') {
             setErrors((prevState) => ({
                 ...prevState,
                 email: "Email must be required"
             }))
-            return 0;
+            result = 0;
         }
         if (userAccount.password === '') {
             setErrors((prevState) => ({
                 ...prevState,
                 password: "Password must be required"
             }))
-            return 0;
+            result = 0;
         }
-        return 1;
+        return result;
     }
 
     return (
@@ -83,7 +84,7 @@ const SignInForm = () => {
                 <label htmlFor="check" className="custom-input-label ms-2">
                     Remember Me
                 </label>
-                <Alert className='my-3' variant='danger'>{submitResult}</Alert>
+                {submitResult !== '' ? <Alert className='my-3' variant='danger'>{submitResult}</Alert> : null}
             </div>
             <div className="d-grid">
                 <Button type="submit" name="Sign In" />
