@@ -39,7 +39,7 @@ const SignIn = () => {
           </div>
           <p className="text-end mt-2">
             Forgot <a href="">Password</a>
-            <Link to="sign-up" className="ms-2">
+            <Link to="../sign-up" className="ms-2">
               Sign up
             </Link>
           </p>
