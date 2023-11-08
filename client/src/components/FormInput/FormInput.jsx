@@ -1,6 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const FormInput = ({ type, name, title, placeholder, value, onChange, error }) => {
+const FormInput = ({
+    type,
+    name,
+    title,
+    placeholder,
+    value,
+    onChange,
+    error,
+    disabled,
+}) => {
     return (
         <div className="mb-2">
             <label htmlFor="password">{title}</label>
@@ -11,10 +20,11 @@ const FormInput = ({ type, name, title, placeholder, value, onChange, error }) =
                 defaultValue={value}
                 onChange={onChange}
                 name={name}
+                disabled={disabled}
             />
-            {error !== '' ? <p className='text-danger'>{error}</p> : null}
+            {error !== "" ? <p className="text-danger">{error}</p> : null}
         </div>
-    )
-}
+    );
+};
 
-export default FormInput
+export default FormInput;
