@@ -1,17 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import FormInput from "../../components/FormInput/FormInput";
 import Button from "../../components/Button/Button";
+import { Form } from "react-bootstrap"
 const SignInForm = () => {
+    const [userAccount, setUserAccount] = useState({
+        email: "",
+        password: "",
+    });
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(userAccount);
+    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        console.log(name);
+        console.log(value);
+        setUserAccount((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
     return (
-        <form>
+        <Form onSubmit={handleSubmit}>
             <h3 className="text-center">Sign In</h3>
-            <FormInput type="email" name="Email" placeholder="Enter Email" />
+            <FormInput type="email" name="email" title="Email" placeholder="Enter Email" value={userAccount.email} onChange={handleChange} />
             <FormInput
                 type="password"
-                name="Password"
+                name="password"
+                title="Password"
                 placeholder="Enter Password"
+                value={userAccount.password}
+                onChange={handleChange}
             />
             <div>
                 <input
@@ -24,7 +45,7 @@ const SignInForm = () => {
                 </label>
             </div>
             <div className="d-grid">
-                <Button name="Sign In" />
+                <Button type="submit" name="Sign In" />
             </div>
             <p className="text-end mt-2">
                 Forgot <a href="">Password</a>
@@ -32,7 +53,7 @@ const SignInForm = () => {
                     Sign up
                 </Link>
             </p>
-        </form>
+        </Form>
     )
 }
 
