@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import FormInput from "../../components/FormInput/FormInput";
 import Button from "../../components/Button/Button";
 import { Form } from "react-bootstrap"
+import { authServices } from '../../services/AuthServices';
 const SignInForm = () => {
 
     const [userAccount, setUserAccount] = useState({
@@ -16,8 +17,10 @@ const SignInForm = () => {
     });
     const handleSubmit = (event) => {
         event.preventDefault();
-        validateData(userAccount);
-        console.log(userAccount);
+        const isValidData = validateData(userAccount);
+        if (isValidData) {
+            const response = authServices.login(userAccount);
+        }
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -33,13 +36,16 @@ const SignInForm = () => {
                 ...prevState,
                 email: "Email must be required"
             }))
+            return 0;
         }
         if (userAccount.password === '') {
             setErrors((prevState) => ({
                 ...prevState,
                 password: "Password must be required"
             }))
+            return 0;
         }
+        return 1;
     }
 
     return (
