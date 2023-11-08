@@ -2,10 +2,10 @@ import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 const ProtectedLayout = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
   const outlet = useOutlet();
 
-  if (!user) {
+  if (!token) {
     return <Navigate to="/auth/sign-in" />;
   }
 

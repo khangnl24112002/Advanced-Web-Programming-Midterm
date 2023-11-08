@@ -1,7 +1,7 @@
 import axios from "axios";
 export const axiosInstance = axios.create({
   baseURL:
-    "https://advanced-web-programming-midterm-production.up.railway.app/api",
+    "https://advanced-web-programming-midterm-production.up.railway.app/",
   timeout: 10000,
   headers: {
     Authorization: "YOUR_TOKEN",
