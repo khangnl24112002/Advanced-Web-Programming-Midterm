@@ -1,0 +1,50 @@
+.editContainer{
+    width:400px;
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+
+.backButton{
+    background-color:#0b5ed7;
+    width: 60px;
+    height: 40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 10px;
+    color:#FFFFFF;
+    cursor: pointer;
+}
+
+.forwardButton{
+    background-color:#0b5ed7;
+    width: 60px;
+    height: 40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 10px;
+    color:#FFFFFF;
+    cursor: pointer;
+    text-align: right;
+}
+
+
+.editIntro{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:18px;
+    margin-left:12px;
+}
+
+.formInputLine{
+    display: flex;
+    gap:24px;
+}
+
+.hiddenElement{
+    display: none;
+}
