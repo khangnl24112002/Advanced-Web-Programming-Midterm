@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Param, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards, Put, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -29,8 +29,8 @@ export class UserController {
   @ApiCreatedResponse({
     type: GetUsersResponse,
   })
-  @Put('email')
-  update(@Body() updateUserDto: UpdateUserDto, @Param('email') email: string) {
+  @Put('')
+  update(@Body() updateUserDto: UpdateUserDto, @Query('email') email: string) {
     return this.userService.update(email,updateUserDto);
   }
 
