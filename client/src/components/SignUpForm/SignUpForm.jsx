@@ -50,42 +50,42 @@ const SignUpForm = () => {
         if (userAccount.email === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                email: "Email must be required"
+                email: "Email không được để trống"
             }))
             result = 0;
         }
         if (userAccount.password === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                password: "Password must be required"
+                password: "Mật khẩu không được để trống"
             }))
             result = 0;
         }
         if (userAccount.firstName === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                firstName: "First name must be required"
+                firstName: "Tên không được để trống"
             }))
             result = 0;
         }
         if (userAccount.lastName === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                lastName: "Last name must be required"
+                lastName: "Họ không được để trống"
             }))
             result = 0;
         }
         if (userAccount.confirmPassword === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                confirmPassword: "Confirm password must be required"
+                confirmPassword: "Xác nhận mật khẩu không được để trống"
             }))
             result = 0;
         }
         if (userAccount.password !== userAccount.confirmPassword) {
             setErrors((prevState) => ({
                 ...prevState,
-                confirmPassword: "Confirm password and password must be the same"
+                confirmPassword: "Xác nhận mật khẩu không trùng khớp"
             }))
             result = 0;
         }
@@ -101,8 +101,8 @@ const SignUpForm = () => {
             <FormInput type="password" name="password" placeholder="Nhập mật khẩu" title="Mật khẩu" onChange={handleChange} error={errors.password} />
             <FormInput type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" title="Xác nhận mật khẩu" onChange={handleChange} error={errors.confirmPassword} />
             {submitResult !== '' ? <Alert className='my-3' variant='danger'>{submitResult}</Alert> : null}
-            <div className="d-grid my-3">
-                <Button name="Đăng nhập" />
+            <div className="d-grid my-3 ">
+                <Button name="Đăng ký" />
             </div>
             <p className="text-center mt-2">
                 Đã có tài khoản ?
