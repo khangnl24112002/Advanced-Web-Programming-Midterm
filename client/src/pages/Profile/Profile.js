@@ -11,7 +11,6 @@ const Profile = () => {
         logout();
     };
     const [isEditing, setIsEditing] = useState(false);
-    console.log(isEditing);
     return (
         <div>
             <div className="userActions">
