@@ -30,11 +30,10 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const isValidData = validateData(userAccount);
-        console.log(token);
+        console.log(userAccount);
         if (isValidData) {
             const response = await userServices.update(
-                user.email,
-                token,
+                userAccount.email,
                 userAccount
             );
             if (response.status === true) {
