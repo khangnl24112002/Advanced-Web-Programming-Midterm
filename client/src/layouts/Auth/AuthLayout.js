@@ -7,7 +7,12 @@ const AuthLayout = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-primary">
-      <div className="form_container p-5 rounded bg-white">{outlet}</div>
+      <div
+        style={{ borderRadius: "20px" }}
+        className="form_container p-5 bg-white"
+      >
+        {outlet}
+      </div>
     </div>
   );
 };

@@ -64,13 +64,13 @@ const SignInForm = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h3 className="text-center">Sign In</h3>
-            <FormInput error={errors.email} type="email" name="email" title="Email" placeholder="Enter Email" value={userAccount.email} onChange={handleChange} />
+            <h3 className="text-center">Đăng nhập</h3>
+            <FormInput error={errors.email} type="email" name="email" title="Địa chỉ Email" placeholder="Nhập Email" value={userAccount.email} onChange={handleChange} />
             <FormInput
                 type="password"
                 name="password"
-                title="Password"
-                placeholder="Enter Password"
+                title="Mật khẩu"
+                placeholder="Nhập mật khẩu"
                 value={userAccount.password}
                 onChange={handleChange}
                 error={errors.password}
@@ -82,17 +82,17 @@ const SignInForm = () => {
                     id="check"
                 />
                 <label htmlFor="check" className="custom-input-label ms-2">
-                    Remember Me
+                    Ghi nhớ thông tin đăng nhập
                 </label>
                 {submitResult !== '' ? <Alert className='my-3' variant='danger'>{submitResult}</Alert> : null}
             </div>
-            <div className="d-grid">
+            <div className="d-grid my-3">
                 <Button type="submit" name="Sign In" />
             </div>
-            <p className="text-end mt-2">
-                Forgot <a href="">Password</a>
+            <p className="text-center mt-2">
+                Chưa có tài khoản ?
                 <Link to="../sign-up" className="ms-2">
-                    Sign up
+                    Đăng ký ngay
                 </Link>
             </p>
         </Form>

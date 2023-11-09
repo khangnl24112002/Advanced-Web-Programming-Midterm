@@ -94,20 +94,20 @@ const SignUpForm = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h3 className="text-center">Sign In</h3>
-            <FormInput type="text" name="firstName" placeholder="Enter First Name" title="First Name" onChange={handleChange} error={errors.firstName} />
-            <FormInput type="text" name="lastName" placeholder="Enter Last Name" title="Last Name" onChange={handleChange} error={errors.lastName} />
-            <FormInput type="email" name="email" placeholder="Enter Your Email" title="Email" onChange={handleChange} error={errors.email} />
-            <FormInput type="password" name="password" placeholder="Enter Password" title="Password" onChange={handleChange} error={errors.password} />
-            <FormInput type="password" name="confirmPassword" placeholder="Enter Confirm Password" title="Confirm Password" onChange={handleChange} error={errors.confirmPassword} />
+            <h3 className="text-center">Đăng ký</h3>
+            <FormInput type="text" name="firstName" placeholder="Nhập tên" title="Tên của bạn" onChange={handleChange} error={errors.firstName} />
+            <FormInput type="text" name="lastName" placeholder="Nhập họ" title="Họ của bạn" onChange={handleChange} error={errors.lastName} />
+            <FormInput type="email" name="email" placeholder="Nhập email" title="Địa chỉ Email" onChange={handleChange} error={errors.email} />
+            <FormInput type="password" name="password" placeholder="Nhập mật khẩu" title="Mật khẩu" onChange={handleChange} error={errors.password} />
+            <FormInput type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" title="Xác nhận mật khẩu" onChange={handleChange} error={errors.confirmPassword} />
             {submitResult !== '' ? <Alert className='my-3' variant='danger'>{submitResult}</Alert> : null}
-            <div className="d-grid">
-                <Button name="Sign Up" />
+            <div className="d-grid my-3">
+                <Button name="Đăng nhập" />
             </div>
-            <p className="text-end mt-2">
-                Already registered?
+            <p className="text-center mt-2">
+                Đã có tài khoản ?
                 <Link to="../sign-in" className="ms-2">
-                    Sign In
+                    Đăng nhập
                 </Link>
             </p>
         </Form>
