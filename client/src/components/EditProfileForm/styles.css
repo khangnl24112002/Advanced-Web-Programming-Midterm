@@ -1,9 +1,17 @@
+.editScreen{
+    height: calc(100vh - 60px);
+    background-color: #F5F5F5;
+}
+
 .editContainer{
-    width:400px;
+    width:500px;
     position: absolute;
     left:50%;
     top:50%;
     transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 36px;
+    border-radius: 20px;
 }
 
 .backButton{
