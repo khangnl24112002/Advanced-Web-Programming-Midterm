@@ -7,6 +7,7 @@ import { authServices } from '../../services/AuthServices';
 import { useNavigate } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 import LoadingModal from '../LoadingModal/LoadingModal';
+import { EMAIL_REGEX } from "../../constants"
 
 const SignUpForm = () => {
     const initialState = {
@@ -56,6 +57,13 @@ const SignUpForm = () => {
             setErrors((prevState) => ({
                 ...prevState,
                 email: "Email không được để trống"
+            }))
+            result = 0;
+        }
+        if (EMAIL_REGEX.test(userAccount.email) === false) {
+            setErrors((prevState) => ({
+                ...prevState,
+                email: "Email không hợp lệ"
             }))
             result = 0;
         }

@@ -8,6 +8,7 @@ import { authServices } from '../../services/AuthServices';
 import Alert from 'react-bootstrap/Alert';
 import { useAuth } from "../../hooks/useAuth"
 import LoadingModal from '../LoadingModal/LoadingModal';
+import { EMAIL_REGEX } from "../../constants"
 
 const SignInForm = () => {
 
@@ -53,6 +54,13 @@ const SignInForm = () => {
             setErrors((prevState) => ({
                 ...prevState,
                 email: "Email không được để trống"
+            }))
+            result = 0;
+        }
+        if (EMAIL_REGEX.test(userAccount.email) === false) {
+            setErrors((prevState) => ({
+                ...prevState,
+                email: "Email không hợp lệ"
             }))
             result = 0;
         }
