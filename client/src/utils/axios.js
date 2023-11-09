@@ -8,7 +8,7 @@ export const axiosInstance = axios.create({
         post: {
             "Content-Type": "application/json",
         },
-        patch: {
+        put: {
             "Content-Type": "application/json",
         },
     },
