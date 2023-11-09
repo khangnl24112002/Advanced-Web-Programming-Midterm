@@ -5,17 +5,17 @@ import Button from "../../components/Button/Button";
 import { Form } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 
-import { authServices } from "../../services/AuthServices";
+import { userServices } from "../../services/UserServices";
 import { useAuth } from "../../hooks/useAuth";
 
 import "./styles.css";
 
 const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
     const initalState = {
-        email: user.email,
+        // email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        id: user.id,
+        // id: user.id,
     };
     const initalErrors = {
         email: "",
@@ -30,15 +30,18 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const isValidData = validateData(userAccount);
-        if (isValidData) {
-            // const response = await authServices.edit(userAccount);
-            // if (response.status === true) {
-            //     setSubmitResult(response.data.message);
-            // } else {
-            //     setSubmitResult(response.message);
-            // }
-        }
         console.log(userAccount);
+        if (isValidData) {
+            const response = await userServices.update(user.email, userAccount);
+            if (response.status === true) {
+                console.log("its true");
+                setSubmitResult(response.data.message);
+            } else {
+                console.log("its false");
+
+                setSubmitResult(response.message);
+            }
+        }
     };
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -51,7 +54,6 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
     const validateData = (userAccount) => {
         setErrors(initalErrors);
         let result = 1;
-        console.log(userAccount);
         if (userAccount.email === "") {
             setErrors((prevState) => ({
                 ...prevState,
@@ -89,7 +91,6 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                     <div
                         className="backButton"
                         onClick={() => {
-                            console.log("pressed");
                             toggleEdit(false);
                         }}
                     >
@@ -100,7 +101,6 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                     <div
                         className="forwardButton"
                         onClick={() => {
-                            console.log("pressed");
                             toggleEdit(true);
                         }}
                     >
@@ -125,10 +125,10 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                         name="email"
                         title="Email"
                         placeholder="Change Email"
-                        value={userAccount.email}
+                        value={user.email}
                         onChange={handleChange}
                         error={errors.email}
-                        disabled={!isEditing}
+                        disabled={true}
                     />
                     <div className="formInputLine">
                         <FormInput
@@ -152,15 +152,15 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                             disabled={!isEditing}
                         />
                     </div>
-                    <div className="hiddenElement">
+                    {/* <div className="hiddenElement">
                         <FormInput
                             type="id"
                             name="id"
                             value={userAccount.id}
                             onChange={handleChange}
                         />
-                    </div>
-                    {submitResult !== "" ? (
+                    </div> */}
+                    {submitResult !== "" && isEditing ? (
                         <Alert className="my-3" variant="danger">
                             {submitResult}
                         </Alert>
