@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap"
 import { authServices } from '../../services/AuthServices';
 import Alert from 'react-bootstrap/Alert';
 import { useAuth } from "../../hooks/useAuth"
+import LoadingModal from '../LoadingModal/LoadingModal';
 
 const SignInForm = () => {
 
@@ -14,6 +15,7 @@ const SignInForm = () => {
         email: "",
         password: "",
     }
+    const [modalShow, setModalShow] = React.useState(false);
     const [userAccount, setUserAccount] = useState(initalState);
     const [errors, setErrors] = useState(initalState);
     const [submitResult, setSubmitResult] = useState('');
@@ -21,6 +23,7 @@ const SignInForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setModalShow(true);
         const isValidData = validateData(userAccount);
         if (isValidData) {
             const response = await authServices.login(userAccount);
@@ -32,6 +35,7 @@ const SignInForm = () => {
                 setSubmitResult(response.message);
             }
         }
+        setModalShow(false);
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -48,14 +52,14 @@ const SignInForm = () => {
         if (userAccount.email === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                email: "Email must be required"
+                email: "Email không được để trống"
             }))
             result = 0;
         }
         if (userAccount.password === '') {
             setErrors((prevState) => ({
                 ...prevState,
-                password: "Password must be required"
+                password: "Mật khẩu không được để trống"
             }))
             result = 0;
         }
@@ -87,7 +91,7 @@ const SignInForm = () => {
                 {submitResult !== '' ? <Alert className='my-3' variant='danger'>{submitResult}</Alert> : null}
             </div>
             <div className="d-grid my-3">
-                <Button type="submit" name="Sign In" />
+                <Button type="submit" name="Đăng nhập" />
             </div>
             <p className="text-center mt-2">
                 Chưa có tài khoản ?
@@ -95,6 +99,7 @@ const SignInForm = () => {
                     Đăng ký ngay
                 </Link>
             </p>
+            <LoadingModal show={modalShow} />
         </Form>
     )
 }

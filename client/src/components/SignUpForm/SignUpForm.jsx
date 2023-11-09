@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import { authServices } from '../../services/AuthServices';
 import { useNavigate } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
+import LoadingModal from '../LoadingModal/LoadingModal';
 
 const SignUpForm = () => {
     const initialState = {
@@ -15,6 +16,8 @@ const SignUpForm = () => {
         password: "",
         confirmPassword: "",
     }
+
+    const [modalShow, setModalShow] = React.useState(false);
     const [userAccount, setUserAccount] = useState(initialState);
 
     const [errors, setErrors] = useState(initialState);
@@ -23,6 +26,7 @@ const SignUpForm = () => {
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setModalShow(true);
         const isValidData = validateData(userAccount);
         if (isValidData) {
             const { confirmPassword, ...userData } = userAccount;
@@ -34,6 +38,7 @@ const SignUpForm = () => {
                 setSubmitResult(response.message);
             }
         }
+        setModalShow(false);
     }
 
     const handleChange = (event) => {
@@ -110,6 +115,7 @@ const SignUpForm = () => {
                     Đăng nhập
                 </Link>
             </p>
+            <LoadingModal show={modalShow} />
         </Form>
     )
 }
