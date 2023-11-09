@@ -1,15 +1,21 @@
 import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import MainNavigation from "../../components/MainNavigation/MainNavigation";
 
 const ProtectedLayout = () => {
-  const { token } = useAuth();
-  const outlet = useOutlet();
+    const { token } = useAuth();
+    const outlet = useOutlet();
 
-  if (!token) {
-    return <Navigate to="/auth/sign-in" />;
-  }
+    if (!token) {
+        return <Navigate to="/auth/sign-in" />;
+    }
 
-  return <div>{outlet}</div>;
+    return (
+        <>
+            <MainNavigation />
+            <div>{outlet}</div>
+        </>
+    );
 };
 
 export default ProtectedLayout;
