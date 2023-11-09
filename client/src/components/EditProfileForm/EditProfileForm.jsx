@@ -10,9 +10,9 @@ import { useAuth } from "../../hooks/useAuth";
 
 import "./styles.css";
 
-const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
+const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
     const initalState = {
-        // email: user.email,
+        email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
         // id: user.id,
@@ -30,15 +30,18 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const isValidData = validateData(userAccount);
-        console.log(userAccount);
+        console.log(token);
         if (isValidData) {
-            const response = await userServices.update(user.email, userAccount);
+            const response = await userServices.update(
+                user.email,
+                token,
+                userAccount
+            );
             if (response.status === true) {
-                console.log("its true");
-                setSubmitResult(response.data.message);
+                setUserAccount(response.data);
+                setSubmitResult(response.message);
             } else {
-                console.log("its false");
-
+                console.log(response.message);
                 setSubmitResult(response.message);
             }
         }
@@ -120,7 +123,7 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                             name="email"
                             title="Email"
                             placeholder="Change Email"
-                            value={user.email}
+                            value={userAccount.email}
                             onChange={handleChange}
                             error={errors.email}
                             disabled={true}
