@@ -13,14 +13,6 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
     return (
         <div>
-            <div className="userActions">
-                <div>
-                    <p style={{ fontWeight: 600 }}>
-                        Welcome back, {user.firstName}
-                    </p>
-                </div>
-                <button onClick={() => handleLogout()}>Log out</button>
-            </div>
             <EditProfileForm
                 user={user}
                 isEditing={isEditing}

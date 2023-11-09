@@ -54,24 +54,18 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
     const validateData = (userAccount) => {
         setErrors(initalErrors);
         let result = 1;
-        if (userAccount.email === "") {
-            setErrors((prevState) => ({
-                ...prevState,
-                email: "Email must be required",
-            }));
-            result = 0;
-        }
+
         if (userAccount.firstName === "") {
             setErrors((prevState) => ({
                 ...prevState,
-                firstName: "First Name is required",
+                firstName: "Tên không được để trống",
             }));
             result = 0;
         }
         if (userAccount.lastName === "") {
             setErrors((prevState) => ({
                 ...prevState,
-                lastName: "Last Name is required",
+                lastName: "Họ không được để trống",
             }));
             result = 0;
         }
@@ -111,7 +105,7 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
             <Form onSubmit={handleSubmit}>
                 <div className="editIntro">
                     <h3 className="text-center">
-                        {isEditing ? "Edit" : "Your"} profile
+                        {isEditing ? "Chỉnh sửa hồ sơ" : "Hồ sơ của bạn"}
                     </h3>
                     <img
                         src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
@@ -132,23 +126,23 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                     />
                     <div className="formInputLine">
                         <FormInput
-                            type="firstName"
-                            name="firstName"
-                            title="First Name"
-                            placeholder="Enter First Name"
-                            value={userAccount.firstName}
-                            onChange={handleChange}
-                            error={errors.firstName}
-                            disabled={!isEditing}
-                        />
-                        <FormInput
                             type="lastName"
                             name="lastName"
-                            title="First Name"
+                            title="Họ"
                             placeholder="Enter Last Name"
                             value={userAccount.lastName}
                             onChange={handleChange}
                             error={errors.lastName}
+                            disabled={!isEditing}
+                        />
+                        <FormInput
+                            type="firstName"
+                            name="firstName"
+                            title="Tên"
+                            placeholder="Enter First Name"
+                            value={userAccount.firstName}
+                            onChange={handleChange}
+                            error={errors.firstName}
                             disabled={!isEditing}
                         />
                     </div>
@@ -167,7 +161,7 @@ const EditProfileForm = ({ user, isEditing, toggleEdit }) => {
                     ) : null}
                     {isEditing && (
                         <div className="d-grid">
-                            <Button type="submit" name="Edit" />
+                            <Button type="submit" name="Xác nhận" />
                         </div>
                     )}
                 </div>
