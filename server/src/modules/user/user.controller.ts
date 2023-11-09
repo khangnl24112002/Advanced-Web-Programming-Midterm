@@ -11,13 +11,12 @@ import { RolesGuard } from 'src/guards/roles.guard';
 @Controller('user')
 @ApiTags('user')
 @ApiBearerAuth('Bearer')
-@Roles(ROLES.ADMIN)
-@UseGuards(JwtAuthGuard, RolesGuard)
 export class UserController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly userService: UserService) {}
 
-
+  @Roles(ROLES.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiCreatedResponse({
     type: GetUsersResponse,
   })
@@ -26,6 +25,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiCreatedResponse({
     type: GetUsersResponse,
   })
