@@ -1,10 +1,11 @@
 import axios from "axios";
+const getToken = () => JSON.parse(localStorage.getItem("token"));
 export const axiosInstance = axios.create({
     baseURL:
         "https://advanced-web-programming-midterm-production.up.railway.app/",
     timeout: 10000,
     headers: {
-        Authorization: "YOUR_TOKEN",
+        Authorization: `Bearer ${getToken()}`,
         post: {
             "Content-Type": "application/json",
         },

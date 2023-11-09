@@ -6,11 +6,10 @@ import EditProfileForm from "../../components/EditProfileForm/EditProfileForm";
 import "./styles.css";
 
 const Profile = () => {
-    const { user, logout } = useAuth();
-    const handleLogout = () => {
-        logout();
-    };
+    const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
+    const getToken = () => localStorage.getItem("access_token");
+    console.log(getToken());
     return (
         <div>
             <EditProfileForm
