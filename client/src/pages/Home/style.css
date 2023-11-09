@@ -1,0 +1,8 @@
+.homeScreen{
+    height: calc(100vh - 60px);
+    background-color: #F5F5F5;
+}
+
+.homeContainer{
+    padding: 12px 18px;
+}

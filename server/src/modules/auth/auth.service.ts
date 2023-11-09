@@ -73,7 +73,7 @@ export class AuthService {
     if (!ex_user) {
       throw new HttpException({
         status: false, 
-        daa: null,
+        data: null,
         message: "Tài khoản không tồn tại"
       }, HttpStatus.BAD_REQUEST)
     }
