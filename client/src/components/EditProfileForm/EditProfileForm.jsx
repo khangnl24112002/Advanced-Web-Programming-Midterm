@@ -6,16 +6,14 @@ import { Form } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 
 import { userServices } from "../../services/UserServices";
-import { useAuth } from "../../hooks/useAuth";
 
 import "./styles.css";
 
-const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
+const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
     const initalState = {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        // id: user.id,
     };
     const initalErrors = {
         email: "",
@@ -32,7 +30,6 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const isValidData = validateData(userAccount);
-        console.log(userAccount);
         if (isValidData) {
             const response = await userServices.update(
                 userAccount.email,
@@ -44,13 +41,17 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
                 const userStorage = JSON.parse(localStorage.getItem("user"));
                 const updatedUser = JSON.stringify({
                     ...userStorage,
-                    firstName: response.status.firstName,
-                    lastName: response.status.lastName,
+                    firstName: userAccount.firstName,
+                    lastName: userAccount.lastName,
                 });
-                console.log(updatedUser);
+                localStorage.setItem("user", updatedUser);
+                editProfile(userAccount);
                 setSubmitResult(response.message);
+                setTimeout(() => {
+                    toggleEdit(false);
+                    window.location.reload();
+                }, 1000);
             } else {
-                console.log(response.message);
                 setSubmitResult(response.message);
             }
         }
@@ -124,6 +125,7 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
                             src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
                             width={100}
                             height={100}
+                            alt=""
                         />
                     </div>
                     <div className="editContext">
@@ -143,7 +145,7 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
                                 name="lastName"
                                 title="Họ"
                                 placeholder="Enter Last Name"
-                                value={userAccount.lastName}
+                                value={user.lastName}
                                 onChange={handleChange}
                                 error={errors.lastName}
                                 disabled={!isEditing}
@@ -153,7 +155,7 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
                                 name="firstName"
                                 title="Tên"
                                 placeholder="Enter First Name"
-                                value={userAccount.firstName}
+                                value={user.firstName}
                                 onChange={handleChange}
                                 error={errors.firstName}
                                 disabled={!isEditing}

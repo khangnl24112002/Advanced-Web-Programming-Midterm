@@ -17,7 +17,7 @@ const UserCard = ({ email, firstName, lastName, status, image }) => {
                 </span>
             </p>
             <div className="imageContainer">
-                <img className="image" src={image} alt={email} />
+                <img className="image" src={image} alt="" />
             </div>
         </div>
     );
