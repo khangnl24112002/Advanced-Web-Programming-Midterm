@@ -2,12 +2,14 @@ import { NavLink } from "react-router-dom";
 
 import "./style.css";
 import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
 
 const MainNavigation = () => {
     const { user, logout } = useAuth();
+    const [userAccount, setUserAccount] = useState(user);
     return (
         <header className="header">
-            <div>Chào mửng trở lại, {user.firstName}</div>
+            <div>Chào mửng trở lại, {userAccount.firstName}</div>
             <nav>
                 <ul className="list">
                     <li>
@@ -32,7 +34,13 @@ const MainNavigation = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <div onClick={() => logout()} className="logOutButton">
+                        <div
+                            onClick={() => {
+                                setUserAccount({});
+                                logout();
+                            }}
+                            className="logOutButton"
+                        >
                             Đăng xuất
                         </div>
                     </li>

@@ -3,16 +3,20 @@ import "./style.css";
 import UserCard from "../../components/UserCard/UserCard";
 
 import { userServices } from "../../services/UserServices";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const Home = () => {
     const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const fetchUsers = async () => {
+            setIsLoading(true);
             return await userServices.getAll();
         };
         fetchUsers()
             .then((result) => {
                 setUsers(result.data);
+                setIsLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -21,6 +25,7 @@ const Home = () => {
     console.log(users);
     return (
         <div className="homeScreen">
+            {isLoading && <LoadingSpinner />}
             {users && (
                 <div className="userContainer">
                     {users.map((user) => (
@@ -37,7 +42,7 @@ const Home = () => {
                     ))}
                 </div>
             )}
-            {!users && <p>Khong users</p>}
+            {!users && <p>User Home Screen</p>}
         </div>
     );
 };

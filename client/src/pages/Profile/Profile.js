@@ -8,13 +8,17 @@ import "./styles.css";
 const Profile = () => {
     const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
-    const getToken = () => localStorage.getItem("access_token");
-    console.log(getToken());
+    const [userProfile, setUserProfile] = useState(user);
+
     return (
         <div>
             <EditProfileForm
-                user={user}
+                user={userProfile}
                 isEditing={isEditing}
+                editProfile={(value) => {
+                    console.log("value moi chinh : ", value);
+                    setUserProfile(value);
+                }}
                 toggleEdit={(value) => setIsEditing(value)}
             />
         </div>
