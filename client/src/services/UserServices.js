@@ -14,4 +14,13 @@ export const userServices = {
             return error.response.data;
         }
     },
+    getAll: async () => {
+        try {
+            const response = await axiosInstance.get("/user");
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return error.response.data;
+        }
+    },
 };
