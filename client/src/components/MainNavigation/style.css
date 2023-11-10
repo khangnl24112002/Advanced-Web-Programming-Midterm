@@ -2,9 +2,11 @@
   display:flex;
   justify-content:space-between;
   align-items: center;
-  padding:20px 24px;
+  padding:24px;
   height:60px;
-  background-color: #C3C3C3;
+  background-color: #000000;
+  color:#FFFFFF;
+  user-select: none;
 }
 
 .list{
@@ -16,10 +18,11 @@
 
 li, li a {
   display: inline;
-  margin-right: 20px;
+  margin-right: 12px;
   cursor: pointer;
   height: 100%;
   text-decoration: none;
+  padding: 8px 14px;
 }
 
 .logOutButton{
@@ -27,6 +30,12 @@ li, li a {
 }
 
 .active{
-  color:#141927;
-  text-decoration: underline;
+  color:#FFFFFF;
+  border-radius: 4px;
+  background-color: #a3a2f8;
+  color:#000000
+}
+
+.unactive{
+  color:#FFFFFF
 }

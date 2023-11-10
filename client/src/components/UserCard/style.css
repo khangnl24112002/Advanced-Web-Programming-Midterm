@@ -1,0 +1,36 @@
+.userCard{
+    width: 350px;
+    background-color: #FFFFFF;
+    padding: 12px 18px;
+    border-color: #000000;
+    border-radius: 10px;
+    border-width: 4px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.name{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.onlineStatus{
+    font-weight: 600;
+    color:green;
+}
+
+.offlineStatus{
+    font-weight: 600;
+    color:red;
+}
+
+.imageContainer{
+    text-align: right;
+}
+
+.image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}

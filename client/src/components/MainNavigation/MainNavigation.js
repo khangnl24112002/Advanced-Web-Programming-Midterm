@@ -14,7 +14,7 @@ const MainNavigation = () => {
                         <NavLink
                             to="/dashboard"
                             className={({ isActive }) =>
-                                isActive ? "active" : undefined
+                                isActive ? "active" : "unactive"
                             }
                             end
                         >
@@ -25,7 +25,7 @@ const MainNavigation = () => {
                         <NavLink
                             to="/dashboard/profile"
                             className={({ isActive }) =>
-                                isActive ? "active" : undefined
+                                isActive ? "active" : "unactive"
                             }
                         >
                             Hồ sơ

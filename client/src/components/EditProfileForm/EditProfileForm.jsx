@@ -27,6 +27,8 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
     const [errors, setErrors] = useState(initalErrors);
     const [submitResult, setSubmitResult] = useState("");
 
+    const [success, setSuccess] = useState(false);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const isValidData = validateData(userAccount);
@@ -38,6 +40,14 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
             );
             if (response.status === true) {
                 setUserAccount(response.data);
+                setSuccess(true);
+                const userStorage = JSON.parse(localStorage.getItem("user"));
+                const updatedUser = JSON.stringify({
+                    ...userStorage,
+                    firstName: response.status.firstName,
+                    lastName: response.status.lastName,
+                });
+                console.log(updatedUser);
                 setSubmitResult(response.message);
             } else {
                 console.log(response.message);
@@ -158,7 +168,12 @@ const EditProfileForm = ({ user, token, isEditing, toggleEdit }) => {
                             />
                         </div> */}
                         {submitResult !== "" && isEditing ? (
-                            <Alert className="my-3" variant="danger">
+                            <Alert
+                                className="my-3"
+                                variant={
+                                    success === false ? "danger" : "success"
+                                }
+                            >
                                 {submitResult}
                             </Alert>
                         ) : null}
