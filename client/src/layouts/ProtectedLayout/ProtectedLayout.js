@@ -11,10 +11,10 @@ const ProtectedLayout = () => {
     }
 
     return (
-        <>
+        <main className="protectedLayout">
             <MainNavigation />
             <div>{outlet}</div>
-        </>
+        </main>
     );
 };
 
