@@ -1,0 +1,41 @@
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  padding:24px;
+  height:60px;
+  background-color: #000000;
+  color:#FFFFFF;
+  user-select: none;
+}
+
+.list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+}
+
+li, li a {
+  display: inline;
+  margin-right: 12px;
+  cursor: pointer;
+  height: 100%;
+  text-decoration: none;
+  padding: 8px 14px;
+}
+
+.logOutButton{
+  color:#FF0000;
+}
+
+.active{
+  color:#FFFFFF;
+  border-radius: 4px;
+  background-color: #a3a2f8;
+  color:#000000
+}
+
+.unactive{
+  color:#FFFFFF
+}
