@@ -7,6 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
 import NotFound from "./pages/NotFound/NotFound";
 import LandingPage from "./pages/Landing Page/LandingPage";
+import "./styles/app.sass"
 function App() {
   return (
     <div className="App">
