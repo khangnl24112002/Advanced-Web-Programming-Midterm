@@ -7,7 +7,8 @@ import TextInput from "../../components/TextInput";
 import { EMAIL_REGEX } from "../../constants";
 import { authServices } from "../../services/AuthServices";
 import { useNavigate } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
+import { errorToast } from "../../utils/toast";
 const SignUp = () => {
   const initialState = {
     firstName: "",
@@ -18,21 +19,17 @@ const SignUp = () => {
   };
 
   const [userAccount, setUserAccount] = useState(initialState);
-
-  const [errors, setErrors] = useState(initialState);
-
-  const [submitResult, setSubmitResult] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const isValidData = validateData(userAccount);
-    if (isValidData) {
+    if (isValidData === 1) {
       const { confirmPassword, ...userData } = userAccount;
       const response = await authServices.signup(userData);
       if (response.status === true) {
         navigate("/");
       } else {
-        setSubmitResult(response.message);
+        return errorToast(response.message);
       }
     }
   };
@@ -47,55 +44,26 @@ const SignUp = () => {
 
   const validateData = (userAccount) => {
     let result = 1;
-    setErrors(initialState);
-    if (userAccount.email === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        email: "Email không được để trống",
-      }));
-      result = 0;
-    }
-    if (EMAIL_REGEX.test(userAccount.email) === false) {
-      setErrors((prevState) => ({
-        ...prevState,
-        email: "Email không hợp lệ",
-      }));
-      result = 0;
-    }
-    if (userAccount.password === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        password: "Mật khẩu không được để trống",
-      }));
-      result = 0;
-    }
     if (userAccount.firstName === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        firstName: "Tên không được để trống",
-      }));
-      result = 0;
+      return errorToast("Tên không được để trống");
     }
     if (userAccount.lastName === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        lastName: "Họ không được để trống",
-      }));
-      result = 0;
+      return errorToast("Họ không được để trống");
     }
-    if (userAccount.confirmPassword === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        confirmPassword: "Xác nhận mật khẩu không được để trống",
-      }));
-      result = 0;
+    if (userAccount.email === "") {
+      return errorToast("Email không được để trống");
+    }
+    if (EMAIL_REGEX.test(userAccount.email) === false) {
+      return errorToast("Email không hợp lệ");
+    }
+    if (userAccount.password === "") {
+      return errorToast("Mật khẩu không được để trống");
     }
     if (userAccount.password !== userAccount.confirmPassword) {
-      setErrors((prevState) => ({
-        ...prevState,
-        confirmPassword: "Xác nhận mật khẩu không trùng khớp",
-      }));
-      result = 0;
+      return errorToast("Xác nhận mật khẩu không trùng khớp");
+    }
+    if (userAccount.confirmPassword === "") {
+      return errorToast("Xác nhận mật khẩu không được để trống");
     }
     return result;
   };

@@ -7,6 +7,7 @@ import TextInput from "../../components/TextInput";
 import { useAuth } from "../../hooks/useAuth";
 import { EMAIL_REGEX } from "../../constants";
 import { authServices } from "../../services/AuthServices";
+import { errorToast } from "../../utils/toast";
 
 const SignIn = () => {
   const initalState = {
@@ -14,20 +15,17 @@ const SignIn = () => {
     password: "",
   };
   const [userAccount, setUserAccount] = useState(initalState);
-  const [errors, setErrors] = useState(initalState);
-  const [submitResult, setSubmitResult] = useState("");
   const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const isValidData = validateData(userAccount);
-    if (isValidData) {
+    if (isValidData === 1) {
       const response = await authServices.login(userAccount);
       if (response.status === true) {
-        setSubmitResult(response.data.message);
         login(response.data.user, response.data.token);
       } else {
-        setSubmitResult(response.message);
+        return errorToast(response.message);
       }
     }
   };
@@ -41,29 +39,15 @@ const SignIn = () => {
   };
 
   const validateData = (userAccount) => {
-    setErrors(initalState);
     let result = 1;
-    console.log(userAccount);
     if (userAccount.email === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        email: "Email không được để trống",
-      }));
-      result = 0;
+      return errorToast("Email không được để trống");
     }
     if (EMAIL_REGEX.test(userAccount.email) === false) {
-      setErrors((prevState) => ({
-        ...prevState,
-        email: "Email không hợp lệ",
-      }));
-      result = 0;
+      return errorToast("Email không hợp lệ");
     }
     if (userAccount.password === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        password: "Mật khẩu không được để trống",
-      }));
-      result = 0;
+      return errorToast("Mật khẩu không được để trống");
     }
     return result;
   };
