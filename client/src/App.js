@@ -1,19 +1,18 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
-import AuthLayout from "./layouts/Auth/AuthLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout/ProtectedLayout";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
 import NotFound from "./pages/NotFound/NotFound";
 import LandingPage from "./pages/Landing Page/LandingPage";
-import "./styles/app.sass"
+import "./styles/app.sass";
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth">
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
         </Route>

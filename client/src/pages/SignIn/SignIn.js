@@ -1,36 +1,31 @@
 import React, { useState } from "react";
 import cn from "classnames";
-import styles from "./SignUp.module.sass";
+import styles from "./SignIn.module.sass";
 import { use100vh } from "react-div-100vh";
 import { Link } from "react-router-dom";
 import TextInput from "../../components/TextInput";
+import { useAuth } from "../../hooks/useAuth";
 import { EMAIL_REGEX } from "../../constants";
 import { authServices } from "../../services/AuthServices";
-import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
-  const initialState = {
-    firstName: "",
-    lastName: "",
+const SignIn = () => {
+  const initalState = {
     email: "",
     password: "",
-    confirmPassword: "",
   };
-
-  const [userAccount, setUserAccount] = useState(initialState);
-
-  const [errors, setErrors] = useState(initialState);
-
+  const [userAccount, setUserAccount] = useState(initalState);
+  const [errors, setErrors] = useState(initalState);
   const [submitResult, setSubmitResult] = useState("");
-  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const isValidData = validateData(userAccount);
     if (isValidData) {
-      const { confirmPassword, ...userData } = userAccount;
-      const response = await authServices.signup(userData);
+      const response = await authServices.login(userAccount);
       if (response.status === true) {
-        navigate("/");
+        setSubmitResult(response.data.message);
+        login(response.data.user, response.data.token);
       } else {
         setSubmitResult(response.message);
       }
@@ -46,8 +41,9 @@ const SignUp = () => {
   };
 
   const validateData = (userAccount) => {
+    setErrors(initalState);
     let result = 1;
-    setErrors(initialState);
+    console.log(userAccount);
     if (userAccount.email === "") {
       setErrors((prevState) => ({
         ...prevState,
@@ -69,65 +65,16 @@ const SignUp = () => {
       }));
       result = 0;
     }
-    if (userAccount.firstName === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        firstName: "Tên không được để trống",
-      }));
-      result = 0;
-    }
-    if (userAccount.lastName === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        lastName: "Họ không được để trống",
-      }));
-      result = 0;
-    }
-    if (userAccount.confirmPassword === "") {
-      setErrors((prevState) => ({
-        ...prevState,
-        confirmPassword: "Xác nhận mật khẩu không được để trống",
-      }));
-      result = 0;
-    }
-    if (userAccount.password !== userAccount.confirmPassword) {
-      setErrors((prevState) => ({
-        ...prevState,
-        confirmPassword: "Xác nhận mật khẩu không trùng khớp",
-      }));
-      result = 0;
-    }
     return result;
   };
 
   const heightWindow = use100vh();
-
   return (
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
         <form>
-          <div className={cn("h2", styles.title)}>Sign Up</div>
+          <div className={cn("h2", styles.title)}>Sign in</div>
           <div className={styles.body}>
-            <TextInput
-              className={styles.field}
-              name="firstName"
-              type="text"
-              placeholder="First Name"
-              required
-              icon="mail"
-              onChange={handleChange}
-              value={userAccount.firstName}
-            />
-            <TextInput
-              className={styles.field}
-              name="lastName"
-              type="text"
-              placeholder="Last Name"
-              required
-              icon="mail"
-              onChange={handleChange}
-              value={userAccount.lastName}
-            />
             <TextInput
               className={styles.field}
               name="email"
@@ -148,29 +95,19 @@ const SignUp = () => {
               onChange={handleChange}
               value={userAccount.password}
             />
-            <TextInput
-              className={styles.field}
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-              required
-              icon="lock"
-              onChange={handleChange}
-              value={userAccount.confirmPassword}
-            />
             <button
               onClick={handleSubmit}
               className={cn("button", styles.button)}
             >
-              Sign up
+              Sign in
             </button>
             <div className={styles.note}>
               This website was developed in Advanced Web Programming Course.
             </div>
             <div className={styles.info}>
-              Have an account?{" "}
-              <Link className={styles.link} to="../sign-in">
-                Sign in
+              Don’t have an account?{" "}
+              <Link className={styles.link} to="../sign-up">
+                Sign up
               </Link>
             </div>
           </div>
@@ -180,4 +117,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
