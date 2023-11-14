@@ -87,7 +87,7 @@ const User = ({ className }) => {
                                         className={cn(styles.item, {
                                             [styles.color]: x.color,
                                         })}
-                                        activeClassName={styles.active}
+                                        activeclassname={styles.active}
                                         to={x.url}
                                         onClick={() => setVisible(false)}
                                         key={index}

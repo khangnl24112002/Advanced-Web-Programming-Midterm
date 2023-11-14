@@ -36,7 +36,7 @@ const Home = () => {
                             status={"Offline"}
                             email={user.email}
                             image={
-                                "https://cdn-icons-png.flaticon.com/512/21/21104.png"
+                                "https://previews.123rf.com/images/besignmn/besignmn2003/besignmn200300002/141628717-line-icon-of-the-user-or-avatar-rounded-and-thin-line-icon-for-your-website-menu-on-the-light-blue.jpg"
                             }
                         />
                     ))}
