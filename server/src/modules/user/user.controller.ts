@@ -4,9 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GetUsersResponse } from './dto/create-user.dto';
 import { JwtAuthGuard } from 'src/guards/jwt.auth.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { ROLES } from 'src/utils';
-import { RolesGuard } from 'src/guards/roles.guard';
+
 
 @Controller('user')
 @ApiTags('user')
@@ -15,8 +13,7 @@ export class UserController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly userService: UserService) {}
 
-  @Roles(ROLES.ADMIN)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiCreatedResponse({
     type: GetUsersResponse,
   })
