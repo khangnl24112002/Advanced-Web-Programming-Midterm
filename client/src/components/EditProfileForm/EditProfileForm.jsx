@@ -7,6 +7,8 @@ import Alert from "react-bootstrap/Alert";
 
 import { userServices } from "../../services/UserServices";
 
+import styles from "./EditProfileForm.module.sass";
+
 import "./styles.css";
 
 const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
@@ -86,8 +88,8 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
     };
 
     return (
-        <main className="editScreen">
-            <div className="editContainer">
+        <main className={styles.editScreen}>
+            <div className={styles.editContainer}>
                 <div
                     style={
                         isEditing
@@ -97,7 +99,7 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
                 >
                     {isEditing && (
                         <div
-                            className="backButton"
+                            className={styles.backButton}
                             onClick={() => {
                                 toggleEdit(false);
                             }}
@@ -107,7 +109,7 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
                     )}
                     {!isEditing && (
                         <div
-                            className="forwardButton"
+                            className={styles.forwardButton}
                             onClick={() => {
                                 toggleEdit(true);
                             }}
@@ -117,18 +119,19 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
                     )}
                 </div>
                 <Form onSubmit={handleSubmit}>
-                    <div className="editIntro">
-                        <h3 className="text-center">
+                    <div className={styles.editIntro}>
+                        <h3 className={styles["text-center"]}>
                             {isEditing ? "Chỉnh sửa hồ sơ" : "Hồ sơ của bạn"}
                         </h3>
-                        <img
-                            src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
-                            width={100}
-                            height={100}
-                            alt=""
-                        />
+                        <div className={styles.avatarContainer}>
+                            <img
+                                src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
+                                alt="avatar"
+                                className={styles.avatarImage}
+                            />
+                        </div>
                     </div>
-                    <div className="editContext">
+                    <div className={styles.editContext}>
                         <FormInput
                             type="email"
                             name="email"

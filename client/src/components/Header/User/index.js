@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import cn from "classnames";
 import OutsideClickHandler from "react-outside-click-handler";
+import cn from "classnames";
 import styles from "./User.module.sass";
 import Icon from "../../Icon";
 
@@ -64,7 +64,7 @@ const items = [
 
 const User = ({ className }) => {
     const [visible, setVisible] = useState(false);
-    const { user, logout } = useAuth();
+    const { logout } = useAuth();
     return (
         <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
             <div
