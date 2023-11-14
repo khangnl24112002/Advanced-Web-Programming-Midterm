@@ -6,7 +6,7 @@ import styles from "./UserCard.module.sass";
 
 const UserCard = ({ email, firstName, lastName, status, image }) => {
     return (
-        <div className="userCard">
+        <div className={styles.userCard}>
             <div className={cn("h4", styles.title)}>
                 {firstName + " " + lastName}
             </div>

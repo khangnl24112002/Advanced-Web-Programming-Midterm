@@ -39,7 +39,7 @@ const Sidebar = ({ className, onClose }) => {
                             x.url && (
                                 <NavLink
                                     className={styles.item}
-                                    activeClassName={styles.active}
+                                    activeclassname={styles.active}
                                     to={x.url}
                                     key={index}
                                     exact
