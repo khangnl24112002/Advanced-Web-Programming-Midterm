@@ -1,13 +1,18 @@
 import React from "react";
 import "./style.css";
 
+import cn from "classnames";
+import styles from "./UserCard.module.sass";
+
 const UserCard = ({ email, firstName, lastName, status, image }) => {
     return (
         <div className="userCard">
-            <p className="name">{firstName + " " + lastName}</p>
+            <div className={cn("h4", styles.title)}>
+                {firstName + " " + lastName}
+            </div>
             <p className="email">Email: {email}</p>
             <p>
-                Status:{" "}
+                Trạng thái:{" "}
                 <span
                     className={
                         status === "online" ? "onlineStatus" : "offlineStatus"
