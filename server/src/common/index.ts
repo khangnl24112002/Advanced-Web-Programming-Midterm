@@ -4,6 +4,7 @@ export const CORS: CorsOptions = {
   origin: [
     'http://localhost:3000',
     'https://advanced-web-programming-midterm.vercel.app',
+    'https://advanced-web-programming-midterm-6f92.vercel.app',
   ],
   credentials: true,
   exposedHeaders: 'uuid',
