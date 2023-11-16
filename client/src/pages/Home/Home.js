@@ -5,6 +5,16 @@ import UserCard from "../../components/UserCard/UserCard";
 import { userServices } from "../../services/UserServices";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+let statusArr = ["Online", "Offline"];
+
+let avatarArr = ["/assets/male-avatar.jpg", "/assets/female-avatar.jpg"];
+
+const randomStatus = () =>
+    statusArr[Math.floor(Math.random() * statusArr.length)];
+
+const randomAvatar = () =>
+    avatarArr[Math.floor(Math.random() * avatarArr.length)];
+
 const Home = () => {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -33,11 +43,9 @@ const Home = () => {
                             key={user.email}
                             firstName={user.firstName}
                             lastName={user.lastName}
-                            status={"Offline"}
+                            status={randomStatus()}
                             email={user.email}
-                            image={
-                                "https://previews.123rf.com/images/besignmn/besignmn2003/besignmn200300002/141628717-line-icon-of-the-user-or-avatar-rounded-and-thin-line-icon-for-your-website-menu-on-the-light-blue.jpg"
-                            }
+                            image={randomAvatar()}
                         />
                     ))}
                 </div>
