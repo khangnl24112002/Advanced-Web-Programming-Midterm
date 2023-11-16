@@ -74,15 +74,15 @@ const SignUp = () => {
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
         <form>
-          <div className={cn("h2", styles.title)}>Sign Up</div>
+          <div className={cn("h2", styles.title)}>Đăng ký</div>
           <div className={styles.body}>
             <TextInput
               className={styles.field}
               name="firstName"
               type="text"
-              placeholder="First Name"
+              placeholder="Tên của bạn"
               required
-              icon="mail"
+              icon="edit"
               onChange={handleChange}
               value={userAccount.firstName}
             />
@@ -90,9 +90,9 @@ const SignUp = () => {
               className={styles.field}
               name="lastName"
               type="text"
-              placeholder="Last Name"
+              placeholder="Họ của bạn"
               required
-              icon="mail"
+              icon="edit"
               onChange={handleChange}
               value={userAccount.lastName}
             />
@@ -100,7 +100,7 @@ const SignUp = () => {
               className={styles.field}
               name="email"
               type="email"
-              placeholder="Your email"
+              placeholder="Địa chỉ Email"
               required
               icon="mail"
               onChange={handleChange}
@@ -110,7 +110,7 @@ const SignUp = () => {
               className={styles.field}
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Mật khẩu"
               required
               icon="lock"
               onChange={handleChange}
@@ -120,7 +120,7 @@ const SignUp = () => {
               className={styles.field}
               name="confirmPassword"
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Xác nhận mật khẩu"
               required
               icon="lock"
               onChange={handleChange}
@@ -130,15 +130,16 @@ const SignUp = () => {
               onClick={handleSubmit}
               className={cn("button", styles.button)}
             >
-              Sign up
+              Đăng ký
             </button>
             <div className={styles.note}>
-              This website was developed in Advanced Web Programming Course.
+              Trang web này thực hiện cho môn học Phát triển ứng dụng Web nâng
+              cao.
             </div>
             <div className={styles.info}>
-              Have an account?{" "}
+              Đã có tài khoản?{" "}
               <Link className={styles.link} to="../sign-in">
-                Sign in
+                Đăng nhập
               </Link>
             </div>
           </div>
