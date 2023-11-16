@@ -9,8 +9,6 @@ import { userServices } from "../../services/UserServices";
 
 import styles from "./EditProfileForm.module.sass";
 
-import "./styles.css";
-
 const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
     const initalState = {
         email: user.email,
@@ -125,7 +123,7 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
                         </h3>
                         <div className={styles.avatarContainer}>
                             <img
-                                src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
+                                src="/assets/sample-avatar.jpg"
                                 alt="avatar"
                                 className={styles.avatarImage}
                             />
@@ -142,7 +140,7 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
                             error={errors.email}
                             disabled={true}
                         />
-                        <div className="formInputLine">
+                        <div className={styles.formInputLine}>
                             <FormInput
                                 type="lastName"
                                 name="lastName"

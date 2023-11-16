@@ -3,14 +3,26 @@ import styles from "./Sidebar.module.sass";
 import { Link, NavLink } from "react-router-dom";
 import cn from "classnames";
 import Icon from "../Icon";
-import Image from "../Image";
 import Theme from "../Theme";
+import Dropdown from "./Dropdown";
+import Image from "../Image";
 
 const navigation = [
     {
-        title: "Trang chủ",
+        title: "Home",
         icon: "home",
         url: "/dashboard",
+    },
+    {
+        title: "Users",
+        slug: "users",
+        icon: "diamond",
+        dropdown: [
+            {
+                title: "Dashboard",
+                url: "/dashboard",
+            },
+        ],
     },
 ];
 
@@ -25,36 +37,59 @@ const Sidebar = ({ className, onClose }) => {
                     [styles.active]: visible,
                 })}
             >
+                <button className={styles.close} onClick={onClose}>
+                    <Icon name="close" size="24" />
+                </button>
                 <Link className={styles.logo} to="/dashboard" onClick={onClose}>
                     <Image
                         className={styles.pic}
-                        src="/assets/logo-dark.png"
-                        srcDark="/assets/logo-light.png"
+                        src="/assets/logo-khtn.png"
+                        srcDark="/assets/logo-khtn.png"
                         alt="Core"
                     />
                 </Link>
                 <div className={styles.menu}>
-                    {navigation.map(
-                        (x, index) =>
-                            x.url && (
-                                <NavLink
-                                    className={styles.item}
-                                    activeclassname={styles.active}
-                                    to={x.url}
-                                    key={index}
-                                    exact
-                                    onClick={onClose}
-                                >
-                                    <Icon name={x.icon} size="24" />
-                                    {x.title}
-                                </NavLink>
-                            )
+                    {navigation.map((x, index) =>
+                        x.url ? (
+                            <NavLink
+                                className={styles.item}
+                                activeclassname={styles.active}
+                                to={x.url}
+                                key={index}
+                                exact
+                                onClick={onClose}
+                            >
+                                <Icon name={x.icon} size="24" />
+                                {x.title}
+                            </NavLink>
+                        ) : (
+                            <Dropdown
+                                className={styles.dropdown}
+                                visibleSidebar={visible}
+                                setValue={setVisible}
+                                key={index}
+                                item={x}
+                                onClose={onClose}
+                            />
+                        )
                     )}
                 </div>
+                <button
+                    className={styles.toggle}
+                    onClick={() => setVisible(!visible)}
+                >
+                    <Icon name="arrow-right" size="24" />
+                    <Icon name="close" size="24" />
+                </button>
                 <div className={styles.foot}>
                     <Theme className={styles.theme} visibleSidebar={visible} />
                 </div>
             </div>
+
+            <div
+                className={cn(styles.overlay, { [styles.active]: visible })}
+                onClick={() => setVisible(false)}
+            ></div>
         </>
     );
 };
