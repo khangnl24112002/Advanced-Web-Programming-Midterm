@@ -57,13 +57,13 @@ const SignIn = () => {
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
         <form>
-          <div className={cn("h2", styles.title)}>Sign in</div>
+          <div className={cn("h2", styles.title)}>Đăng nhập</div>
           <div className={styles.body}>
             <TextInput
               className={styles.field}
               name="email"
               type="email"
-              placeholder="Your email"
+              placeholder="Địa chỉ Email"
               required
               icon="mail"
               onChange={handleChange}
@@ -73,7 +73,7 @@ const SignIn = () => {
               className={styles.field}
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Mật khẩu"
               required
               icon="lock"
               onChange={handleChange}
@@ -83,15 +83,16 @@ const SignIn = () => {
               onClick={handleSubmit}
               className={cn("button", styles.button)}
             >
-              Sign in
+              Đăng nhập
             </button>
             <div className={styles.note}>
-              This website was developed in Advanced Web Programming Course.
+              Trang web này thực hiện cho môn học Phát triển ứng dụng Web nâng
+              cao.
             </div>
             <div className={styles.info}>
-              Don’t have an account?{" "}
+              Chưa có tài khoản?{" "}
               <Link className={styles.link} to="../sign-up">
-                Sign up
+                Đăng ký ngay
               </Link>
             </div>
           </div>
