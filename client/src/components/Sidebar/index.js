@@ -27,7 +27,6 @@ const navigation = [
 ];
 
 const Sidebar = ({ className, onClose }) => {
-    const [visibleHelp, setVisibleHelp] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return (
@@ -52,11 +51,16 @@ const Sidebar = ({ className, onClose }) => {
                     {navigation.map((x, index) =>
                         x.url ? (
                             <NavLink
-                                className={styles.item}
+                                // className={styles.item}
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.item} ${styles.active}`
+                                        : styles.item
+                                }
                                 activeclassname={styles.active}
                                 to={x.url}
                                 key={index}
-                                exact
+                                end
                                 onClick={onClose}
                             >
                                 <Icon name={x.icon} size="24" />
