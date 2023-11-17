@@ -3,6 +3,7 @@
     height: 100vh;
     background: url("../../../public/assets/landing-page-background.jpg");
     background-size: cover;
+    user-select: none;
 }
 
 .landingPageContext{
@@ -26,7 +27,7 @@
     border:none;
     outline: none;
     padding: 8px 32px;
-    margin:4px 2px;
+    margin:10px 2px;
     border-radius: 8px;
     font-family: 'Inter',sans-serif;
     font-weight: 700;

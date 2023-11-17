@@ -84,9 +84,14 @@ const User = ({ className }) => {
                             {item.menu.map((x, index) =>
                                 x.url ? (
                                     <NavLink
-                                        className={cn(styles.item, {
-                                            [styles.color]: x.color,
-                                        })}
+                                        // className={cn(styles.item, {
+                                        //     [styles.color]: x.color,
+                                        // })}
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? `${styles.item} ${styles.active}`
+                                                : styles.item
+                                        }
                                         activeclassname={styles.active}
                                         to={x.url}
                                         onClick={() => setVisible(false)}
