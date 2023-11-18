@@ -56,7 +56,6 @@ const Sidebar = ({ className, onClose }) => {
                     {navigation.map((x, index) =>
                         x.url ? (
                             <NavLink
-                                // className={styles.item}
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.item} ${styles.active}`

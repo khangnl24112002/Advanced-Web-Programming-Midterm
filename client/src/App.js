@@ -24,8 +24,8 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="settings" element={<Settings />} />
                     <Route path="shop" element={<Shop />} />
-                    <Route path="profile" index element={<Profile />} />
-                    <Route path="stats" index element={<Stats />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="stats" element={<Stats />} />
                     {/* Handle other routes */}
                 </Route>
                 <Route path="*" element={<NotFound />} />

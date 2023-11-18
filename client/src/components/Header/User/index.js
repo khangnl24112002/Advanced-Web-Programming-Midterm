@@ -20,41 +20,9 @@ const items = [
             },
         ],
     },
-    // {
-    //     menu: [
-    //         {
-    //             title: "Analytics",
-    //             icon: "bar-chart",
-    //             url: "/customers/overview",
-    //         },
-    //         {
-    //             title: "Affiliate center",
-    //             icon: "ticket",
-    //             url: "/affiliate-center",
-    //         },
-    //         {
-    //             title: "Explore creators",
-    //             icon: "grid",
-    //             url: "/explore-creators",
-    //         },
-    //     ],
-    // },
-    // {
-    //     menu: [
-    //         {
-    //             title: "Upgrade to Pro",
-    //             icon: "leaderboard",
-    //             color: true,
-    //             url: "/upgrade-to-pro",
-    //         },
-    //     ],
-    // },
+
     {
         menu: [
-            // {
-            //     title: "Account settings",
-            //     url: "/settings",
-            // },
             {
                 title: "Đăng xuất",
             },
