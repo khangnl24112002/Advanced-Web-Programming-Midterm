@@ -24,6 +24,11 @@ const navigation = [
             },
         ],
     },
+    {
+        title: "Shop",
+        icon: "store",
+        url: "/dashboard/shop",
+    },
 ];
 
 const Sidebar = ({ className, onClose }) => {
