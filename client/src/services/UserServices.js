@@ -1,11 +1,17 @@
 import { axiosInstance } from "../utils/axios";
 
 export const userServices = {
-    update: async (email, userInfo) => {
+    update: async (email, userInfo, token) => {
         try {
             const response = await axiosInstance.put(
                 `/user?email=${email}`,
-                userInfo
+                userInfo,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                }
             );
 
             return response.data;

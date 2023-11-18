@@ -9,7 +9,13 @@ import { userServices } from "../../services/UserServices";
 
 import styles from "./EditProfileForm.module.sass";
 
-const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
+const EditProfileForm = ({
+    user,
+    isEditing,
+    editProfile,
+    toggleEdit,
+    token,
+}) => {
     const initalState = {
         email: user.email,
         firstName: user.firstName,
@@ -33,7 +39,8 @@ const EditProfileForm = ({ user, isEditing, editProfile, toggleEdit }) => {
         if (isValidData) {
             const response = await userServices.update(
                 userAccount.email,
-                userAccount
+                userAccount,
+                token
             );
             if (response.status === true) {
                 setUserAccount(response.data);
