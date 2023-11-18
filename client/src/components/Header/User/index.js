@@ -14,10 +14,10 @@ const items = [
                 title: "Hồ sơ cá nhân",
                 url: "/dashboard/profile",
             },
-            // {
-            //     title: "Edit profile",
-            //     url: "/settings",
-            // },
+            {
+                title: "Cài đặt",
+                url: "/dashboard/settings",
+            },
         ],
     },
     // {
