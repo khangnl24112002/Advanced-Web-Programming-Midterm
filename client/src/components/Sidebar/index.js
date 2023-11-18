@@ -19,8 +19,8 @@ const navigation = [
         icon: "diamond",
         dropdown: [
             {
-                title: "Dashboard",
-                url: "/dashboard",
+                title: "Stats",
+                url: "/dashboard/stats",
             },
         ],
     },
