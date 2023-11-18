@@ -23,10 +23,9 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             const response = await userServices.getAll(token);
-            console.log(response);
             const responseData = await response.data;
-            console.log(responseData);
             const loadUsers = [];
             for (const key in responseData) {
                 loadUsers.push({
@@ -41,7 +40,7 @@ const Home = () => {
         };
 
         fetchData();
-    }, []);
+    }, [token]);
     return (
         <div className="homeScreen">
             {isLoading && <LoadingSpinner />}
