@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 import cn from "classnames";
-import styles from "./SignIn.module.sass";
+import styles from "./ResetPassword.module.sass";
 import { use100vh } from "react-div-100vh";
 import { Link } from "react-router-dom";
 import TextInput from "../../components/TextInput";
 import { useAuth } from "../../hooks/useAuth";
-import { EMAIL_REGEX } from "../../constants";
 import { authServices } from "../../services/AuthServices";
 import { errorToast } from "../../utils/toast";
 
-const SignIn = () => {
+const ResetPassword = () => {
     const initalState = {
-        email: "",
         password: "",
+        confirmedPassword: "",
     };
     const [userAccount, setUserAccount] = useState(initalState);
     const { login } = useAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const isValidData = validateData(userAccount);
-        if (isValidData === 1) {
-            const response = await authServices.login(userAccount);
-            if (response.status === true) {
-                login(response.data.user, response.data.token);
-            } else {
-                return errorToast(response.message);
-            }
-        }
+        // const isValidData = validateData(userAccount);
+        // if (isValidData === 1) {
+        //     const response = await authServices.login(userAccount);
+        //     if (response.status === true) {
+        //         login(response.data.user, response.data.token);
+        //     } else {
+        //         return errorToast(response.message);
+        //     }
+        // }
     };
 
     const handleChange = (event) => {
@@ -40,14 +39,16 @@ const SignIn = () => {
 
     const validateData = (userAccount) => {
         let result = 1;
-        if (userAccount.email === "") {
-            return errorToast("Email không được để trống");
-        }
-        if (EMAIL_REGEX.test(userAccount.email) === false) {
-            return errorToast("Email không hợp lệ");
-        }
         if (userAccount.password === "") {
             return errorToast("Mật khẩu không được để trống");
+        }
+
+        if (userAccount.confirmedPassword === "") {
+            return errorToast("Xác nhận mật khẩu không được để trống");
+        }
+
+        if (userAccount.confirmedPassword === "") {
+            return errorToast("Xác nhận mật khẩu phải giống mật khẩu");
         }
         return result;
     };
@@ -57,18 +58,8 @@ const SignIn = () => {
         <div className={styles.login} style={{ minHeight: heightWindow }}>
             <div className={styles.wrapper}>
                 <form className={styles.form}>
-                    <div className={cn("h2", styles.title)}>Đăng nhập</div>
+                    <div className={cn("h2", styles.title)}>Mật khẩu mới</div>
                     <div className={styles.body}>
-                        <TextInput
-                            className={styles.field}
-                            name="email"
-                            type="email"
-                            placeholder="Địa chỉ Email"
-                            required
-                            icon="mail"
-                            onChange={handleChange}
-                            value={userAccount.email}
-                        />
                         <TextInput
                             className={styles.field}
                             name="password"
@@ -79,32 +70,25 @@ const SignIn = () => {
                             onChange={handleChange}
                             value={userAccount.password}
                         />
+                        <TextInput
+                            className={styles.field}
+                            name="confirmedPassword"
+                            type="password"
+                            placeholder="Xác nhận mật khẩu"
+                            required
+                            icon="lock"
+                            onChange={handleChange}
+                            value={userAccount.confirmedPassword}
+                        />
                         <button
                             onClick={handleSubmit}
                             className={cn("button", styles.button)}
                         >
-                            Đăng nhập
+                            Xác nhận
                         </button>
-                        <div
-                            className={styles.info}
-                            style={{ textAlign: "right" }}
-                        >
-                            <Link
-                                className={styles.link}
-                                to="../forgot-password"
-                            >
-                                Quên mật khẩu?
-                            </Link>
-                        </div>
                         <div className={styles.note}>
                             Trang web này thực hiện cho môn học Phát triển ứng
                             dụng Web nâng cao.
-                        </div>
-                        <div className={styles.info}>
-                            Chưa có tài khoản?{" "}
-                            <Link className={styles.link} to="../sign-up">
-                                Đăng ký ngay
-                            </Link>
                         </div>
                     </div>
                 </form>
@@ -113,4 +97,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default ResetPassword;

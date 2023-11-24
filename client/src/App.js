@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ProtectedLayout from "./layouts/ProtectedLayout/ProtectedLayout";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
 import NotFound from "./pages/NotFound/NotFound";
@@ -19,6 +21,11 @@ function App() {
                 <Route path="/auth" element={<AuthLayout />}>
                     <Route path="sign-up" element={<SignUp />} />
                     <Route path="sign-in" element={<SignIn />} />
+                    <Route path="reset-password" element={<ResetPassword />} />
+                    <Route
+                        path="forgot-password"
+                        element={<ForgotPassword />}
+                    />
                 </Route>
                 <Route path="/dashboard" element={<ProtectedLayout />}>
                     <Route index element={<Home />} />
