@@ -11,7 +11,7 @@ export class AuthService {
     // eslint-disable-next-line prettier/prettier
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
   async generateAccessToken(payload): Promise<string> {
     return this.jwtService.signAsync(payload, {
       secret: process.env.SECRET_KEY,
@@ -26,13 +26,25 @@ export class AuthService {
         email,
       },
     });
-    if (user) {
+    if (user.emailVerified) {
       throw new HttpException({
-        status: false, 
-        daa: null,
+        status: false,
         message: "Tài khoản đã tồn tại"
       }, HttpStatus.BAD_REQUEST)
-    } else {
+    }
+    if (user && !user.emailVerified) {
+      user = await this.prismaService.users.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          firstName,
+          lastName,
+          encryptedPassword,
+          roleId
+        }
+      })
+    } else if (!user){
       user = await this.prismaService.users.create({
         data: {
           firstName,
@@ -67,7 +79,7 @@ export class AuthService {
     });
     if (!ex_user) {
       throw new HttpException({
-        status: false, 
+        status: false,
         data: null,
         message: "Tài khoản không tồn tại"
       }, HttpStatus.BAD_REQUEST)
@@ -77,7 +89,7 @@ export class AuthService {
     const isValidPassword = await comparePassword(password, encryptedPassword);
     if (!isValidPassword) {
       throw new HttpException({
-        status: false, 
+        status: false,
         daa: null,
         message: 'Mật khẩu bạn đã nhập không chính xác.',
       }, HttpStatus.BAD_REQUEST)

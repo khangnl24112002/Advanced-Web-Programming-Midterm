@@ -99,7 +99,7 @@ export class AuthController {
         HttpStatus.BAD_REQUEST,
       );
     }
-    const jwtSercret = this.configService.get<string>('JWT_SECRET_KEY');
+    const jwtSercret = this.configService.get<string>('SECRET_KEY');
     const decoded = await this.jwtService.verifyAsync(token, {
       secret: jwtSercret,
     });
@@ -157,7 +157,7 @@ export class AuthController {
       id: user.id,
     });
     const dynamic_template_data = {
-      link: `http://localhost:3333/auth/reset-password?token=${token}`,
+      link: `http://localhost:3000/auth/reset-password?token=${token}`,
     };
     const msg = this.mailService.messageSignUpGenerate(
       [email],
