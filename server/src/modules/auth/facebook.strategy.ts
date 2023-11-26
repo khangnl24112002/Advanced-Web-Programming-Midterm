@@ -39,10 +39,14 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         password,
       });
     }
-
+    const token = await this.authService.generateAccessToken({
+      id: existUser.id,
+      email: existUser.email,
+    })
     done(null, {
         ...user,
         id: existUser.id,
+        accessToken: token,
     });
   }
 }

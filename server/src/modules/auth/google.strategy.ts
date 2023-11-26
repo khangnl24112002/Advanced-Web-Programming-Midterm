@@ -26,8 +26,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       firstName: name.givenName,
       lastName: name.familyName,
       picture: photos[0].value,
-      accessToken,
-      refreshToken,
     };
     const provider = 'google';
     let existUser: any = await this.authService.findUserByEmail(user.email);
@@ -40,9 +38,11 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         password,
       });
     }
+    const access_token = await this.authService.generateAccessToken({ id: existUser.id, email: existUser.email });
     done(null, {
       ...user,
       id: existUser.id,
+      accessToken: access_token
     });
   }
 }

@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "generate": "npx prisma generate --schema=./src/prisma/schema.prisma",
     "migrate": "npx prisma migrate dev --name init --schema=./src/prisma/schema.prisma",
-    "seed": "ts-node ./src/seed"
+    "seed": "ts-node ./src/seed",
+    "deploy": "npx prisma migrate deploy --schema=./src/prisma/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

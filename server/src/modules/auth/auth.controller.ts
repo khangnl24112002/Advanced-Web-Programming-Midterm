@@ -9,6 +9,7 @@ import {
   Query,
   Render,
   HttpException,
+  Res,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -21,6 +22,7 @@ import { MAIL_TEMPLATE_ID, comparePassword } from 'src/utils';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { Response } from 'express';
 
 
 @Controller('auth')
@@ -65,15 +67,16 @@ export class AuthController {
 
   @Get('google-redirect')
   @UseGuards(GoogleOAuthGuard)
-  async googleAuthRedirect(@Request() req) {
+  async googleAuthRedirect(@Request() req, @Res() res: Response) {
     const { user } = req;
-    return user;
+    return res.redirect(`http://localhost:3000/auth/oauth-redirect?email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}&accessToken=${user.accessToken}`);
   }
 
   @Get("facebook")
   @UseGuards(FacebookAuthGuard)
-  async facebookLogin(): Promise<any> {
-    return HttpStatus.OK;
+  async facebookLogin(@Request() req, @Res() res: Response): Promise<any> {
+    const { user } = req;
+    return res.redirect(`http://localhost:3000/auth/oauth-redirect?email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}&accessToken=${user.accessToken}`);
   }
 
   @Get("facebook-redirect")
