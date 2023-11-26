@@ -72,14 +72,14 @@ export class AuthController {
     return res.redirect(`http://localhost:3000/auth/oauth-redirect?email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}&accessToken=${user.accessToken}`);
   }
 
-  @Get("facebook")
+  @Get("facebook-redirect")
   @UseGuards(FacebookAuthGuard)
   async facebookLogin(@Request() req, @Res() res: Response): Promise<any> {
     const { user } = req;
     return res.redirect(`http://localhost:3000/auth/oauth-redirect?email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}&accessToken=${user.accessToken}`);
   }
 
-  @Get("facebook-redirect")
+  @Get("facebook")
   @UseGuards(FacebookAuthGuard)
   async facebookLoginRedirect(): Promise<any> {
     return {
