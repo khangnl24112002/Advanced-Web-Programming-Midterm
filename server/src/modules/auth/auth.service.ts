@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { comparePassword, hashPassword } from 'src/utils/bcrypt';
-import { RegisterDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import { ROLES } from 'src/utils';
@@ -18,9 +17,9 @@ export class AuthService {
       secret: process.env.SECRET_KEY,
     });
   }
-  async signUpByEmail(createUserDTO: RegisterDto) {
+  async signUpByEmail(createUserDTO: any) {
     const { firstName, lastName, email, password, role } = createUserDTO;
-    const roleId = ROLES[role?.toUpperCase() || 'USER']
+    const roleId: number = ROLES[role?.toUpperCase() || 'USER'] as unknown as number
     const encryptedPassword = await hashPassword(password);
     let user = await this.prismaService.users.findFirst({
       where: {
@@ -49,17 +48,13 @@ export class AuthService {
       id: user.id,
     });
     return {
-      status: true,
-      data: {
-        token: accessToken,
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        },
+      token: accessToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
-      message: 'Đăng ký thành công',
     };
   }
 
@@ -105,5 +100,59 @@ export class AuthService {
       },
       message: 'Đăng nhập thành công',
     };
+  }
+
+  async findUserByEmailAndProvider(email: string, provider: string) {
+    const user = await this.prismaService.users.findFirst({
+      where: {
+        email,
+        provider,
+      },
+    });
+    return user;
+  }
+
+  async findUserByEmail(email: string) {
+    const user = await this.prismaService.users.findFirst({
+      where: {
+        email,
+      },
+    });
+    return user;
+  }
+
+  async findUserVerifyEmail(email: string) {
+    const user = await this.prismaService.users.findFirst({
+      where: {
+        email,
+        emailVerified: true,
+      },
+    });
+    return user;
+  }
+  async verifyUser(id: string) {
+    const user = await this.prismaService.users.update({
+      where: {
+        id,
+      },
+      data: {
+        emailVerified: true,
+        emailVerifiedAt: new Date().toISOString(),
+      },
+    });
+    return user;
+  }
+
+  async updatePassword(id: string, password: string) {
+    const encryptedPassword = await hashPassword(password);
+    const user = await this.prismaService.users.update({
+      where: {
+        id,
+      },
+      data: {
+        encryptedPassword,
+      },
+    });
+    return user;
   }
 }
