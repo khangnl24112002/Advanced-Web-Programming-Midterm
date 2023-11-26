@@ -65,6 +65,9 @@ const SignIn = () => {
             </div>
             <div className={styles.btns}>
               <button
+                onClick={() => {
+                  authServices.handleOAuthLogin("Google");
+                }}
                 type="button"
                 className={cn("button-stroke", styles.button)}
               >
@@ -74,6 +77,9 @@ const SignIn = () => {
               <button
                 type="button"
                 className={cn("button-stroke", styles.button)}
+                onClick={() => {
+                  authServices.handleOAuthLogin("Facebook");
+                }}
               >
                 <img src="/assets/facebook.svg" width="33px" alt="facebook" />
                 Facebook
